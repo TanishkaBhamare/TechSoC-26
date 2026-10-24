@@ -147,18 +147,7 @@ long long findPrivateKey(long long p, long long q, long long e) {
     return -1;
 }
 
-
-long long breakToyRSA(long long n, long long e) {
-    for (long long p = 2; p * p <= n; p++) {
-        if (n % p == 0) {
-            long long q = n / p;
-            return findPrivateKey(p, q, e);
-        }
-    }
-    return -1;
-}
-
-std::vector<std::string> parseOperations(const std::string& arrStr) {
+std::vector<std::string> Operations(const std::string& arrStr) {
     std::vector<std::string> ops;
     if (arrStr.length() < 2) return ops;
 
@@ -193,7 +182,7 @@ int main() {
     std::string currentMsg;
     std::string opsArrayStr;
 
-    std::vector<std::string> operations = parseOperations(opsArrayStr);
+    std::vector<std::string> operations = Operations(opsArrayStr);
 
     for (const std::string& op : operations) {
         if (op == "B64_ENC") {
