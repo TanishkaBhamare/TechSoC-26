@@ -68,7 +68,7 @@ std::string RSA_DEC(const std::string& cipher, long long n, long long d) {
 
     for (char ch : cipher) {
         if (ch == '-') {
-            // We hit a dash, so processing the number we just built
+            // We hit a dash, so process the number we just built
             long long c = std::stoll(numStr);
             long long m = modPow(c, d, n);
             result += static_cast<char>(m);
@@ -151,7 +151,7 @@ std::vector<std::string> Operations(const std::string& arrStr) {
     std::vector<std::string> ops;
     if (arrStr.length() < 2) return ops;
 
-    // finding outer '[' and ']'
+    // Strip outer '[' and ']'
     std::string inner = arrStr.substr(1, arrStr.length() - 2);
     std::string current = "";
     int parenDepth = 0;
@@ -181,6 +181,10 @@ std::vector<std::string> Operations(const std::string& arrStr) {
 int main() {
     std::string currentMsg;
     std::string opsArrayStr;
+
+    if (!(std::cin >> currentMsg >> opsArrayStr)) {
+        return 0;
+    }
 
     std::vector<std::string> operations = Operations(opsArrayStr);
 
